@@ -8,12 +8,12 @@ deps = [
     "//:libmarkley"
 ]
 # Unit tests
-UT_test_glob_matcher = "UT_*.cpp"
-UT_test_names = generate_tests("UT_*.cpp", deps, [])
+UT_test_glob_matcher = "**/UT_*.cpp"
+UT_test_names = generate_tests(UT_test_glob_matcher, deps, [])
 
 # Integration tests
-IT_test_glob_matcher = "IT_*.cpp"
-IT_test_names = generate_tests("IT_*.cpp", deps, [])
+IT_test_glob_matcher = "**/IT_*.cpp"
+IT_test_names = generate_tests(IT_test_glob_matcher, deps, [])
 
 test_suite(
     name = "cached",

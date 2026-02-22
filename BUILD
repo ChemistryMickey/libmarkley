@@ -30,9 +30,10 @@ cc_library(
     name = "libmarkley",
     srcs = glob([
         "src/**/*.cpp",
-        "src/*.cpp",
-        "include/*.hpp"
-    ]),
+    ], allow_empty=True),
+    hdrs = glob([
+        "include/**/*.hpp"
+    ], allow_empty=True),
     includes = ["include", "src"],
     strip_include_prefix = "include",
     copts = copts(),
@@ -42,4 +43,12 @@ cc_library(
     ],
     visibility= ["//visibility:public"],
     linkstatic=True
+)
+
+# Useful aliases
+
+## Create "compile_commands.json" such that VSCode can find includes paths based on bazel pulls, not system headers
+alias(
+    name = "compile_commands",
+    actual = "@wolfd_bazel_compile_commands//:generate_compile_commands",
 )

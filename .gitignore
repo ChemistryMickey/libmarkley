@@ -9,3 +9,4 @@ external
 
 __pycache__
 *.html
+compile_commands.json

@@ -1,11 +1,14 @@
 #! /usr/bin/bash
 
 target="cached"
-if [[ $# == 1 ]]; then
-	target="$1"
-	for t in $(ls $(git rev-parse --show-toplevel)/tests/*$target*.cpp); do 
-		bazel test //tests:$(basename $t ".cpp") --config=unit_testing -j 6
-	done
-else
-	bazel test //tests:$target --config=unit_testing -j 6
-fi
+
+# This is broken because of subdirectories in the tests. Hm. Maybe I shouldn't do that. Maybe the test directory can be the wild west.
+# if [[ $# == 1 ]]; then
+# 	target="$1"
+# 	for t in $(ls $(git rev-parse --show-toplevel)/tests/*$target*.cpp); do 
+# 		bazel test //tests:$(basename $t ".cpp") --config=unit_testing -j 6 --verbose_failures
+# 	done
+# else
+# 	bazel test //tests:$target --config=unit_testing -j 6 --verbose_failures
+# fi
+bazel test //tests:$target --config=unit_testing -j 6 --verbose_failures
