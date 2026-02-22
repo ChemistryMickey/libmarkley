@@ -1,0 +1,11 @@
+bazel-*
+.vscode
+output/
+*.log
+task-list.md
+perf.*
+*.svg
+external
+
+__pycache__
+*.html
