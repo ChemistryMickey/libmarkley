@@ -1,6 +1,7 @@
 #pragma once
 #include <eigen3/Eigen/Dense>
 #include <ranges>
+#include <numeric>
 
 #include "utils/useful_concepts.hpp"
 
@@ -26,5 +27,16 @@ namespace markley {
         else {
             return std::ranges::max(v | std::views::transform([](T x) {return std::abs(x);}));
         }
+    }
+
+    template<size_t N = 3, NumberLike T>
+    T l_2_norm(const Eigen::Vector<T, N>& v) {
+        if constexpr (N == 0) {
+            // Dunno why you'd do that but you do you.
+            return T{0};
+        }
+
+        auto square_vec = v | std::views::transform([](T x) {return std::pow(x, T{2});});
+        return std::accumulate(square_vec.begin(), square_vec.end(), 0);
     }
 }
